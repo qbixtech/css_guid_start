@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git — основы основ</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="scanline" aria-hidden="true"></div>
+
+    <header class="topbar">
+        <div class="topbar__inner">
+            <a class="logo" href="index.html">NEON<span>_</span>BASE</a>
+            <nav class="nav">
+                <a href="index.html">Главная</a>
+                <a href="css.html">CSS</a>
+                <a href="git.html" class="active">Git</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="wrap">
+
+        <h1 class="glitch" data-text="GIT INIT">GIT INIT</h1>
+        <p class="lead">Git хранит историю изменений твоего проекта. Семь команд, с которых начинают все.</p>
+
+        <!-- ============ 1. ЗАЧЕМ НУЖЕН GIT ============ -->
+        <section class="panel">
+            <div class="panel__head"><h3>01 / Зачем</h3></div>
+            <div class="panel__body">
+
+                <p>Представь, что ты переписал файл, и стало хуже. Без Git придётся вспоминать, что там было. Git помнит <b>всё</b>: каждую версию, кто и когда её сделал, и позволяет вернуться на любую.</p>
+
+                <ul class="list">
+                    <li>История изменений — можно откатить любой файл на любой момент</li>
+                    <li>Работа вдвоём без «файла-финала_2_НЕ_ТРОГАТЬ.docx»</li>
+                    <li>История не боится: коммиты не пропадут, пока репозиторий на месте</li>
+                </ul>
+
+                <div class="hint">
+                    <b>Три слова, которые нужно понять сразу:</b><br>
+                    <b>Рабочая папка</b> — файлы, которые ты редактируешь.<br>
+                    <b>Индекс (staging)</b> — то, что ты отметил к следующему сохранению.<br>
+                    <b>Репозиторий</b> — история, всё что было закоммичено.<br>
+                    Работает всегда по этой цепочке: <code>рабочая папка → add → индекс → commit → история</code>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ============ 2. НАСТРОЙКА ============ -->
+        <section class="panel">
+            <div class="panel__head"><h3>02 / Настройка (один раз)</h3></div>
+            <div class="panel__body">
+
+                <p>Git подписывает каждый коммит именем и почтой. Настрой их один раз для всего компьютера:</p>
+
+                <div class="terminal">
+                    <div class="terminal__bar">
+                        <span class="dot dot--red"></span>
+                        <span class="dot dot--amber"></span>
+                        <span class="dot dot--green"></span>
+                        <span class="terminal__title">terminal</span>
+                    </div>
+                    <div class="terminal__body"><span class="cmd">git config --global user.name "Kirill"</span>
+<span class="cmd">git config --global user.email "kirill@example.com"</span></div></div>
+
+                <div class="cmdcard">
+                    <div class="cmdcard__name">Что делает</div>
+                    <p><code>--global</code> означает «для всех проектов на этом компьютере». Если убрать этот флаг — настройка сохранится только для текущего проекта.</p>
+                </div>
+
+                <p>Посмотреть, что настроено:</p>
+
+                <div class="terminal">
+                    <div class="terminal__bar">
+                        <span class="dot dot--red"></span>
+                        <span class="dot dot--amber"></span>
+                        <span class="dot dot--green"></span>
+                        <span class="terminal__title">terminal</span>
+                    </div>
+                    <div class="terminal__body"><span class="cmd">git config --list</span>
+<span class="out">user.name=Kirill
+user.email=kirill@example.com</span></div></div>
+
+            </div>
+        </section>
+
+        <!-- ============ 3. ПЕРВЫЙ РЕПОЗИТОРИЙ ============ -->
+        <section class="panel">
+            <div class="panel__head"><h3>03 / Создать репозиторий</h3></div>
+            <div class="panel__body">
+
+                <div class="cmdcard">
+                    <div class="cmdcard__name">git init</div>
+                    <div class="cmdcard__syntax">git init</div>
+                    <p>Создаёт в текущей папке скрытую папку <code>.git</code> — хранилище всей истории. Выполни один раз в папке проекта.</p>
+                    <p class="note">После этого в терминале рядом с папкой появится ветка <code>main</code> (раньше <code>master</code>).</p>
+                </div>
+
+                <div class="cmdcard">
+                    <div class="cmdcard__name">git status</div>
+                    <div class="cmdcard__syntax">git status</div>
+                    <p>Показывает, что сейчас происходит: какие файлы изменены, что отмечено к сохранению, что лежит в последнем коммите. Самая полезная команда — заглядывай сюда постоянно.</p>
+                </div>
+
+                <div class="terminal">
+                    <div class="terminal__bar">
+                        <span class="dot dot--red"></span>
+                        <span class="dot dot--amber"></span>
+                        <span class="dot dot--green"></span>
+                        <span class="terminal__title">terminal</span>
+                    </div>
+                    <div class="terminal__body"><span class="cmd">git status</span>
+<span class="out">On branch main
+Untracked files:
+  (use "git add &lt;file&gt;" to include in what will be committed)
+    index.html
+    style.css
+
+nothing added to commit yet</span></div></div>
+
+                <p class="note">Untracked files — Git ещё не знает про эти файлы. Он не следит за папкой автоматически, файлы нужно добавлять руками.</p>
+
+            </div>
+        </section>
+
+        <!-- ============ 4. СОХРАНЕНИЕ: add + commit ============ -->
+        <section class="panel">
+            <div class="panel__head"><h3>04 / Сохранить изменения</h3></div>
+            <div class="panel__body">
+
+                <div class="cmdcard">
+                    <div class="cmdcard__name">git add</div>
+                    <div class="cmdcard__syntax">git add index.html      <span class="cmd__comment">// один файл</span>
+git add .             <span class="cmd__comment">// всё сразу</span></div>
+                    <p>Кладёт файл в индекс — «корзину» перед следующим коммитом. Так можно отправить в коммит только часть файлов, а остальное оставить несохранённым.</p>
+                </div>
+
+                <div class="cmdcard">
+                    <div class="cmdcard__name">git commit</div>
+                    <div class="cmdcard__syntax">git commit -m "описание, что изменилось"</div>
+                    <p>Записывает содержимое индекса в историю. Флаг <code>-m</code> обязателен — без него Git откроет редактор и попросит написать сообщение вручную.</p>
+                    <p class="note">Сообщение пишут в прошедшем времени: не «исправил баг», а «исправил баг с меню».</p>
+                </div>
+
+                <p>Вот как файл движется по цепочке:</p>
+
+                <div class="flow">
+                    <div class="flow__box">Рабочая папка<small>файлы на диске</small></div>
+                    <span class="flow__arrow">── git add ──▶</span>
+                    <div class="flow__box flow__box--active">Индекс<small>отмечено к сохранению</small></div>
+                    <span class="flow__arrow">── git commit ──▶</span>
+                    <div class="flow__box">История<small>репозиторий</small></div>
+                </div>
+
+                <p>Типичный рабочий цикл — три команды подряд:</p>
+
+                <div class="terminal">
+                    <div class="terminal__bar">
+                        <span class="dot dot--red"></span>
+                        <span class="dot dot--amber"></span>
+                        <span class="dot dot--green"></span>
+                        <span class="terminal__title">terminal</span>
+                    </div>
+                    <div class="terminal__body"><span class="cmd">git status</span>                       <span class="cmd__comment">// что изменилось</span>
+<span class="cmd">git add .</span>                        <span class="cmd__comment">// отметить всё</span>
+<span class="cmd">git commit -m "первая версия сайта"</span>
+<span class="out">[main (root-commit) 1a2b3c4] первая версия сайта
+ 2 files changed, 120 insertions(+)
+ create mode 100644 index.html
+ create mode 100644 style.css</span></div></div>
+
+            </div>
+        </section>
+
+        <!-- ============ 5. ИСТОРИЯ ============ -->
+        <section class="panel">
+            <div class="panel__head"><h3>05 / История</h3></div>
+            <div class="panel__body">
+
+                <div class="cmdcard">
+                    <div class="cmdcard__name">git log</div>
+                    <div class="cmdcard__syntax">git log</div>
+                    <p>Показывает все коммиты от новых к старым: хеш, автора, дату и сообщение. Флаг <code>--oneline</code> сжимает каждый до одной строки — пригодится, когда коммитов много.</p>
+                </div>
+
+                <div class="terminal">
+                    <div class="terminal__bar">
+                        <span class="dot dot--red"></span>
+                        <span class="dot dot--amber"></span>
+                        <span class="dot dot--green"></span>
+                        <span class="terminal__title">terminal</span>
+                    </div>
+                    <div class="terminal__body"><span class="cmd">git log --oneline</span>
+<span class="out">a1b2c3d поправил отступы в меню
+9f8e7d6 добавил тёмную тему
+1a2b3c4 первая версия сайта</span></div></div>
+
+                <div class="cmdcard">
+                    <div class="cmdcard__name">git diff</div>
+                    <div class="cmdcard__syntax">git diff</div>
+                    <p>Показывает разницу построчно: строки с <span class="plus">+</span> добавлены, с <span class="minus">−</span> удалены. Вызывай <b>до</b> коммита, чтобы проверить, что именно ты сохраняешь.</p>
+                </div>
+
+                <p class="note">Подсказка: <code>q</code> выходит из длинного списка в <code>git log</code>, а <code>q</code> или <code>стрелки</code> — из режима просмотра в <code>git diff</code>.</p>
+
+            </div>
+        </section>
+
+        <!-- ============ 6. GITIGNORE ============ -->
+        <section class="panel">
+            <div class="panel__head"><h3>06 / .gitignore — что не коммитить</h3></div>
+            <div class="panel__body">
+
+                <p>В папке проекта создай файл <code>.gitignore</code> и перечисли то, что не нужно в истории:</p>
+
+                <pre>node_modules/     <span class="cmd__comment">// зависимости — их всегда ставят заново</span>
+.vscode/          <span class="cmd__comment">// настройки редактора</span>
+*.log
+.DS_Store</pre>
+
+                <p>Файл нужен для того, чтобы случайно не отправить в репозиторий пароли, ключи или тысячи лишних файлов.</p>
+
+            </div>
+        </section>
+
+        <!-- ============ ИТОГО ============ -->
+        <section class="panel">
+            <div class="panel__head"><h3>07 / Итого</h3></div>
+            <div class="panel__body">
+
+                <div class="terminal">
+                    <div class="terminal__bar">
+                        <span class="dot dot--red"></span>
+                        <span class="dot dot--amber"></span>
+                        <span class="dot dot--green"></span>
+                        <span class="terminal__title">шпаргалка</span>
+                    </div>
+                    <div class="terminal__body"><span class="cmd">git config --global user.name "Имя"</span>
+<span class="cmd">git config --global user.email "почта"</span>
+<span class="cmd">git init</span>
+<span class="cmd">git status</span>
+<span class="cmd">git add .</span>
+<span class="cmd">git commit -m "сообщение"</span>
+<span class="cmd">git log --oneline</span>
+<span class="cmd">git diff</span>
+<span class="caret"></span></div></div>
+
+                <p class="mt-16">Следующий шаг, когда освоишь это: <code>git clone</code>, <code>git pull</code>, <code>git push</code> — работа с GitHub и чужой папкой.</p>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="wrap">// <a href="css.html">← Шпаргалка CSS</a></div>
+    </footer>
+
+</body>
+</html>

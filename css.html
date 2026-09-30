@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS — базовая шпаргалка</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="scanline" aria-hidden="true"></div>
+
+    <header class="topbar">
+        <div class="topbar__inner">
+            <a class="logo" href="index.html">NEON<span>_</span>BASE</a>
+            <nav class="nav">
+                <a href="index.html">Главная</a>
+                <a href="css.html" class="active">CSS</a>
+                <a href="git.html">Git</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="wrap">
+
+        <h1 class="glitch" data-text="CSS BASE">CSS BASE</h1>
+        <p class="lead">Как задаются стили и что они делают. Минимум теории, максимум примеров.</p>
+
+        <!-- ============ 1. СТРУКТУРА ПРАВИЛА ============ -->
+        <section class="panel">
+            <div class="panel__head"><h3>01 / Правило</h3></div>
+            <div class="panel__body">
+
+                <p>Любое правило CSS состоит из трёх частей:</p>
+
+                <pre>селектор {          /* ЧТО стилизуем */
+    свойство: значение; /* КАК именно */
+}</pre>
+
+                <ul class="list">
+                    <li><b>Селектор</b> — адрес элемента: тег <code>p</code>, класс <code>.card</code> или id <code>#main</code></li>
+                    <li><b>Свойство</b> — что меняем: <code>color</code>, <code>font-size</code></li>
+                    <li><b>Значение</b> — конкретное значение свойства</li>
+                </ul>
+
+                <div class="hint">
+                    <b>Важно:</b> между свойствами ставим <b>;</b>. Последнее свойство точку с запятой может не требовать,
+                    но лучше всегда ставить — так проще дописывать новые строки.
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ============ 2. СЕЛЕКТОРЫ ============ -->
+        <section class="panel">
+            <div class="panel__head"><h3>02 / Селекторы</h3></div>
+            <div class="panel__body">
+
+                <p>Способов указать элемент три, и у них разный приоритет:</p>
+
+                <ul class="list">
+                    <li><code>p</code> — по тегу. Задаёт стили <b>всем</b> элементам этого типа</li>
+                    <li><code>.class</code> — по классу. Можно повесить на сколько угодно элементов</li>
+                    <li><code>#id</code> — по идентификатору. Должен быть один на страницу, приоритет выше всего</li>
+                </ul>
+
+                <h2>Живой пример</h2>
+
+                <div class="terminal">
+                    <div class="terminal__bar">
+                        <span class="dot dot--red"></span>
+                        <span class="dot dot--amber"></span>
+                        <span class="dot dot--green"></span>
+                        <span class="terminal__title">index.html</span>
+                    </div>
+                    <div class="terminal__body"><span class="cmd">p</span>              <span class="cmd__comment">// обычный абзац</span>
+<span class="cmd">&lt;p class="warn"&gt;</span>  <span class="cmd__comment">// с классом</span>
+<span class="cmd">&lt;p id="lead"&gt;</span>     <span class="cmd__comment">// с идентификатором</span></div></div>
+
+                <p>В <code>style.css</code> это выглядит так:</p>
+
+                <pre>p        { color: #333; }         /* 1 — приоритет 1 */
+.warning { color: #ffc247; }     /* 10       */
+#lead    { color: #00f0ff; }     /* 100      */</pre>
+
+                <div class="hint">
+                    <b>Запомни:</b> тег <code>1</code> &lt; класс <code>10</code> &lt; id <code>100</code>.
+                    Если элемент подпадает под несколько правил — победит то, у которого «вес» больше.
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ============ 3. ЦВЕТА И ФОН ============ -->
+        <section class="panel">
+            <div class="panel__head"><h3>03 / Цвет и фон</h3></div>
+            <div class="panel__body">
+
+                <p>Цвет текста — свойство <code>color</code>. Цвет подложки — <code>background-color</code>.</p>
+
+                <pre>p { color: crimson; }                        /* название цвета */
+.box { background-color: #0b0f1a; }           /* HEX: # + 2 цифры красный,
+                                                 2 зелёный, 2 синий */
+.gradient { background: linear-gradient(90deg, #00f0ff, #ff2d95); }</pre>
+
+                <ul class="list">
+                    <li><code>rgb(r, g, b)</code> — числа от 0 до 255. Классика</li>
+                    <li><code>rgba(r, g, b, 0.5)</code> — тот же цвет, но полупрозрачный</li>
+                    <li><code>linear-gradient(угол, цвет1, цвет2)</code> — плавный переход между цветами</li>
+                </ul>
+
+                <div class="hint">
+                    <b>Подсказка:</b> цвет удобно выбирать в DevTools браузера (F12) — кликни на элемент,
+                    в разделе Styles увидишь его текущий цвет и сможешь поменять на глаз.
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ============ 4. ШРИФТЫ И ТЕКСТ ============ -->
+        <section class="panel">
+            <div class="panel__head"><h3>04 / Шрифты и текст</h3></div>
+            <div class="panel__body">
+
+                <pre>body {
+    font-family: "JetBrains Mono", Consolas, monospace;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+h1 { font-weight: bold; }     /* или 700 */
+em { font-style: italic; }
+
+p.center { text-align: center; }
+p.indent { text-indent: 2em; }</pre>
+
+                <ul class="list">
+                    <li><code>font-family</code> — шрифт. Второй вариант через запятую нужен на случай, если первого нет в системе</li>
+                    <li><code>font-size</code> — размер. Можно в <code>px</code>, <code>em</code> (относительно родителя) или <code>rem</code> (от корня страницы)</li>
+                    <li><code>font-weight</code> — толщина: <code>normal</code> / <code>bold</code> / числа 100–900</li>
+                    <li><code>line-height</code> — межстрочный интервал. Удобно в множителях: <code>1.6</code> = в полтора раза больше шрифта</li>
+                    <li><code>text-align</code> — выравнивание: <code>left</code> / <code>center</code> / <code>right</code> / <code>justify</code></li>
+                    <li><code>text-transform</code> — регистр: <code>uppercase</code> (капс), <code>lowercase</code>, <code>capitalize</code></li>
+                    <li><code>text-decoration</code> — подчёркивание <code>underline</code> или зачёркивание <code>line-through</code></li>
+                </ul>
+
+                <p>Шрифты подключаются двумя способами:</p>
+                <ul class="list">
+                    <li>Ссылкой на Google Fonts в <code>&lt;head&gt;</code> — нужен интернет</li>
+                    <li>Файлом <code>@font-face</code> — шрифт лежит рядом с сайтом, интернет не нужен</li>
+                </ul>
+
+            </div>
+        </section>
+
+        <!-- ============ 5. РАЗМЕРЫ И ОТСТУПЫ ============ -->
+        <section class="panel">
+            <div class="panel__head"><h3>05 / Размеры и отступы</h3></div>
+            <div class="panel__body">
+
+                <p>Вокруг каждого элемента есть четыре отступа. Запомни их по часовой стрелке, начиная с верха:</p>
+
+                <pre>margin: 10px 20px 30px 40px;
+/*      ↑     ↑     ↑     ↑
+       сверху справа снизу  слева   */</pre>
+
+                <ul class="list">
+                    <li><code>margin</code> — отступ <b>снаружи</b> элемента, от соседей</li>
+                    <li><code>padding</code> — отступ <b>внутри</b> элемента, от его рамки до содержимого</li>
+                    <li><code>border</code> — рамка. Пишется как <code>1px solid #00f0ff</code>: толщина, стиль, цвет</li>
+                    <li><code>width</code> / <code>height</code> — размер содержимого</li>
+                </ul>
+
+                <p>Можно задавать все четыре стороны сразу — сокращения:</p>
+
+                <pre>padding: 10px;             /* со всех сторон */
+padding: 10px 20px;       /* сверху/снизу, слева/справа */
+padding: 10px 20px 30px; /* сверху, слева/справа, снизу */
+margin: 0 auto;          /* 0 сверху/снизу, auto слева/справа = центрирование */</pre>
+
+                <div class="hint">
+                    <b>box-sizing: border-box</b> — очень полезное свойство (уже стоит в нашем <code>style.css</code>).
+                    Оно заставляет <code>width</code> считаться <b>вместе</b> с padding и border.
+                    Без него блок с <code>width: 300px</code> и <code>padding: 20px</code> будет шириной 340px,
+                    и это почти всегда неожиданность.
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ============ ЧЕКЛИСТ ============ -->
+        <section class="panel">
+            <div class="panel__head"><h3>06 / Итого</h3></div>
+            <div class="panel__body">
+                <ul class="list list--ok">
+                    <li>Правило: <code>селектор { свойство: значение; }</code></li>
+                    <li>Приоритет: тег &lt; класс &lt; id</li>
+                    <li>Цвет текста — <code>color</code>, фон — <code>background-color</code></li>
+                    <li><code>font-family</code>, <code>font-size</code>, <code>line-height</code> отвечают за текст</li>
+                    <li><code>margin</code> снаружи, <code>padding</code> внутри, <code>border</code> между ними</li>
+                    <li><code>0 auto</code> центрирует блок</li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="wrap">// <a href="git.html">Шпаргалка Git →</a></div>
+    </footer>
+
+</body>
+</html>

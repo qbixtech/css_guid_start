@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>// КИБЕР-ШПАРГАЛКА — CSS и Git</title>
+
+    <!-- Шрифты с Google Fonts. Если интернета нет — сработают запасные
+         шрифты, указанные в переменных --font-head и --font-mono в style.css -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Бегущая полоса сканирования — чисто декоративная -->
+    <div class="scanline" aria-hidden="true"></div>
+
+    <!-- ШАПКА -->
+    <header class="topbar">
+        <div class="topbar__inner">
+            <a class="logo" href="index.html">NEON<span>_</span>BASE</a>
+            <nav class="nav">
+                <a href="index.html" class="active">Главная</a>
+                <a href="css.html">CSS</a>
+                <a href="git.html">Git</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="wrap">
+
+        <!-- ГЕРОЙ -->
+        <section class="hero">
+            <!-- Для глитч-эффекта текст дублируется в атрибуте data-text -->
+            <h1 id="qq" class="glitch" data-text="CYBER CHEATSHEET">CYBER CHEATSHEET</h1>
+            <p class="lead">Две шпаргалки: базовые стили сайта и первые шаги в Git.</p>
+
+            <div class="hero__cards">
+
+                <!-- Карточка-ссылка на шпаргалку CSS -->
+                <a class="card hero__card" href="css.html">
+                    <h3>CSS</h3>
+                    <p>Селекторы, цвета, шрифты, текст, списки — всё, что нужно для первого сайта.</p>
+                    <span class="tag">5 разделов</span>
+                </a>
+
+                <!-- Карточка-ссылка на шпаргалку Git -->
+                <a class="card hero__card" href="git.html">
+                    <h3>GIT</h3>
+                    <p>Настройка, первый репозиторий, сохранение правок и просмотр истории.</p>
+                    <span class="tag tag--magenta">7 команд</span>
+                </a>
+
+            </div>
+
+            <p class="blink">▼ выбери раздел</p>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="wrap">// УЧЕБНЫЙ ПРОЕКТ · <span>НЕВОЗМОЖНОЕ РАЗРЕШЕНО</span></div>
+    </footer>
+
+</body>
+</html>
